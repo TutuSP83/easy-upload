@@ -47,8 +47,7 @@ ul {
 
 li {
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
   margin: 10px 0;
   padding: 10px;
   border: 1px solid #ddd;
@@ -88,14 +87,14 @@ a:hover {
     padding: 12px;
   }
 
-  /* Ajuste nas listas de arquivos */
-  #fileList {
-    padding-left: 0;
-  }
-
-  input[type="text"], input[type="password"], #fileInput {
+  input[type="text"], input[type="password"] {
     width: 100%;
     padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  #fileInput {
+    width: 100%;
     margin-bottom: 10px;
   }
 }
