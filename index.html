@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Easy Upload</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>
+      <span class="easy">Easy</span>
+      <span class="upload">Upload</span>
+    </h1>
+    <form id="login-form">
+      <input type="text" id="login-username" placeholder="Nome de usuário" required>
+      <input type="password" id="login-password" placeholder="Senha" required>
+      <button type="submit">Login</button>
+    </form>
+    <button onclick="window.location.href='register.html'">Cadastrar</button>
+  </div>
+  <script>
+    document.getElementById('login-form').onsubmit = (e) => {
+      e.preventDefault();
+      const username = document.getElementById('login-username').value;
+      const password = document.getElementById('login-password').value;
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+
+      if (storedUser && storedUser.username === username && storedUser.password === password) {
+        alert('Login bem-sucedido!');
+        window.location.href = 'upload.html';
+      } else {
+        alert('Nome de usuário ou senha inválidos.');
+      }
+    };
+  </script>
+</body>
+</html>

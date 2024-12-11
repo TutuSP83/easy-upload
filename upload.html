@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload - Easy Upload</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Área de Upload</h1>
+    <p id="welcome-message"></p>
+    <div class="upload-section">
+      <input type="file" id="fileInput">
+      <button onclick="uploadFile()">Enviar</button>
+    </div>
+    <ul id="fileList"></ul>
+    <button onclick="signOut()">Sair</button>
+  </div>
+  <script>
+    const FILE_STORAGE_KEY = 'uploadedFiles';
+
+    // Verifica se o usuário está autenticado
+    function checkAuthentication() {
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+      if (!storedUser) {
+        alert('Você precisa fazer login primeiro.');
+        window.location.href = 'index.html';
+      } else {
+        document.getElementById('welcome-message').textContent = `Bem-vindo, ${storedUser.username}!`;
+      }
+    }
+
+    // Carrega os arquivos salvos no LocalStorage
+    function loadSavedFiles() {
+      const fileList = document.getElementById('fileList');
+      const savedFiles = JSON.parse(localStorage.getItem(FILE_STORAGE_KEY)) || [];
+
+      savedFiles.forEach(fileData => {
+        const listItem = createFileListItem(fileData.name, fileData.url);
+        fileList.appendChild(listItem);
+      });
+    }
+
+    // Cria um item na lista de arquivos
+    function createFileListItem(name, url) {
+      const listItem = document.createElement('li');
+      listItem.textContent = name;
+
+      const downloadLink = document.createElement('a');
+      downloadLink.href = url;
+      downloadLink.textContent = 'Baixar';
+      downloadLink.download = name;
+
+      const deleteButton = document.createElement('button');
+      deleteButton.textContent = 'Excluir';
+      deleteButton.onclick = () => deleteFile(listItem, name);
+
+      listItem.appendChild(downloadLink);
+      listItem.appendChild(deleteButton);
+
+      return listItem;
+    }
+
+    // Envia o arquivo e salva no LocalStorage
+    function uploadFile() {
+      const fileInput = document.getElementById('fileInput');
+      const fileList = document.getElementById('fileList');
+
+      if (fileInput.files.length > 0) {
+        const file = fileInput.files[0];
+        const fileUrl = URL.createObjectURL(file);
+        const savedFiles = JSON.parse(localStorage.getItem(FILE_STORAGE_KEY)) || [];
+
+        savedFiles.push({ name: file.name, url: fileUrl });
+        localStorage.setItem(FILE_STORAGE_KEY, JSON.stringify(savedFiles));
+
+        const listItem = createFileListItem(file.name, fileUrl);
+        fileList.appendChild(listItem);
+      } else {
+        alert('Selecione um arquivo.');
+      }
+    }
+
+    // Exclui o arquivo da lista e do LocalStorage
+    function deleteFile(listItem, name) {
+      const savedFiles = JSON.parse(localStorage.getItem(FILE_STORAGE_KEY)) || [];
+      const updatedFiles = savedFiles.filter(file => file.name !== name);
+
+      localStorage.setItem(FILE_STORAGE_KEY, JSON.stringify(updatedFiles));
+      listItem.remove();
+      alert('Arquivo excluído com sucesso.');
+    }
+
+    // Sai do sistema
+    function signOut() {
+      localStorage.removeItem('user');
+      alert('Você saiu com sucesso!');
+      window.location.href = 'index.html';
+    }
+
+    checkAuthentication();
+    loadSavedFiles();
+  </script>
+</body>
+</html>

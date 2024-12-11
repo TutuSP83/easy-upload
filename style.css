@@ -1,0 +1,61 @@
+/* Estilização geral */
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: #fff;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  text-align: center;
+}
+
+/* Container centralizado */
+.container {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 50px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 90%;
+}
+
+/* Títulos */
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+h1 .easy {
+  color: rgb(255, 99, 71); /* Suave, combinando com o fundo */
+}
+
+h1 .upload {
+  rgb(65, 105, 225); /* Azul suave */
+}
+
+/* Botão de login */
+button {
+  background: #007BFF;
+  color: #6a11cb;
+  border: none;
+  padding: 5px 15px;
+  font-size: 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 350px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  margin-top: 10px; /* Move o botão mais para baixo */
+  margin-left: 15%; /* Move o botão para a direita */
+}
+
+button:hover {
+  background: #0056b3;
+}
