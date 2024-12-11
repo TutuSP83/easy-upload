@@ -93,14 +93,9 @@ a:hover {
     padding-left: 0;
   }
 
-  input[type="text"], input[type="password"] {
+  input[type="text"], input[type="password"], #fileInput {
     width: 100%;
     padding: 10px;
-    margin-bottom: 10px;
-  }
-
-  #fileInput {
-    width: 100%;
     margin-bottom: 10px;
   }
 }
