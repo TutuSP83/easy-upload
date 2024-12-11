@@ -3,26 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Easy Upload</title>
+  <title>Cadastrar - Easy Upload</title>
   <link rel="stylesheet" href="style.css">
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="container">
-    <h1>
-      <span class="easy">Easy</span> 
-      <span class="upload">Upload</span>
-    </h1>
-    <p>Faça login para começar a usar nosso sistema de upload.</p>
-    <button id="google-login">
-      <img src="https://cdn.discordapp.com/attachments/1265425314104873103/1316141119620255844/logo_gmail.png?ex=6759f76f&is=6758a5ef&hm=584b92b3d0ea97eb1b827fe49360dfa8c3a124cb22853ba5a51520a41ff878ca&">
-      Login com Gmail
-    </button>
+    <h1>Cadastrar</h1>
+    <form id="register-form">
+      <input type="text" id="register-username" placeholder="Nome de usuário" required>
+      <input type="password" id="register-password" placeholder="Senha" required>
+      <button type="submit">Cadastrar</button>
+    </form>
+    <button onclick="window.location.href='index.html'">Voltar para Login</button>
   </div>
-
   <script>
-    document.getElementById('google-login').onclick = () => {
-      window.location.href = '/auth/google';
+    document.getElementById('register-form').onsubmit = (e) => {
+      e.preventDefault();
+      const username = document.getElementById('register-username').value;
+      const password = document.getElementById('register-password').value;
+
+      if (username && password) {
+        localStorage.setItem('user', JSON.stringify({ username, password }));
+        alert('Cadastro realizado com sucesso!');
+        window.location.href = 'index.html';
+      } else {
+        alert('Por favor, preencha todos os campos.');
+      }
     };
   </script>
 </body>
